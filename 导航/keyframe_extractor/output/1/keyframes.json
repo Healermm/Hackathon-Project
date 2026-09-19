@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "source": {
+    "path": "/Users/xujiawei/Projects/导航/1.mp4",
+    "codec": "hevc",
+    "width": 720,
+    "height": 1280,
+    "fps": 29.899328859060404,
+    "duration_sec": 9.933333333333334,
+    "declared_frames": 297
+  },
+  "config": {
+    "mode": "adaptive",
+    "sample_every_sec": 0.2,
+    "min_gap_sec": 0.5,
+    "max_gap_sec": 2.0,
+    "novelty_threshold": 0.105,
+    "interval_sec": 1.0,
+    "min_sharpness": 0.0003,
+    "analysis_width": 320,
+    "jpeg_quality": 93
+  },
+  "keyframe_count": 15,
+  "keyframes": [
+    {
+      "index": 0,
+      "filename": "frames/frame_00000_t000000.000.jpg",
+      "frame_number": 0,
+      "timestamp_sec": 0.0,
+      "sharpness": 0.0010072,
+      "novelty": 1.0,
+      "reason": "first_frame",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "index": 1,
+      "filename": "frames/frame_00001_t000000.600.jpg",
+      "frame_number": 18,
+      "timestamp_sec": 0.6,
+      "sharpness": 0.0009692,
+      "novelty": 0.1050431,
+      "reason": "visual_change",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "index": 2,
+      "filename": "frames/frame_00002_t000001.200.jpg",
+      "frame_number": 36,
+      "timestamp_sec": 1.2,
+      "sharpness": 0.0009353,
+      "novelty": 0.1441564,
+      "reason": "visual_change",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "index": 3,
+      "filename": "frames/frame_00003_t000001.800.jpg",
+      "frame_number": 53,
+      "timestamp_sec": 1.8,
+      "sharpness": 0.000559,
+      "novelty": 0.1843915,
+      "reason": "visual_change",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "index": 4,
+      "filename": "frames/frame_00004_t000002.400.jpg",
+      "frame_number": 71,
+      "timestamp_sec": 2.4,
+      "sharpness": 0.000676,
+      "novelty": 0.1997995,
+      "reason": "visual_change",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "index": 5,
+      "filename": "frames/frame_00005_t000003.000.jpg",
+      "frame_number": 89,
+      "timestamp_sec": 3.0,
+      "sharpness": 0.000895,
+      "novelty": 0.1199343,
+      "reason": "visual_change",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "index": 6,
+      "filename": "frames/frame_00006_t000003.600.jpg",
+      "frame_number": 107,
+      "timestamp_sec": 3.6,
+      "sharpness": 0.0003094,
+      "novelty": 0.1562724,
+      "reason": "visual_change",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "index": 7,
+      "filename": "frames/frame_00007_t000004.200.jpg",
+      "frame_number": 125,
+      "timestamp_sec": 4.2,
+      "sharpness": 0.0005361,
+      "novelty": 0.174111,
+      "reason": "visual_change",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "index": 8,
+      "filename": "frames/frame_00008_t000004.800.jpg",
+      "frame_number": 143,
+      "timestamp_sec": 4.8,
+      "sharpness": 0.000469,
+      "novelty": 0.1630304,
+      "reason": "visual_change",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "index": 9,
+      "filename": "frames/frame_00009_t000005.400.jpg",
+      "frame_number": 161,
+      "timestamp_sec": 5.4,
+      "sharpness": 0.0007719,
+      "novelty": 0.1820208,
+      "reason": "visual_change",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "index": 10,
+      "filename": "frames/frame_00010_t000006.000.jpg",
+      "frame_number": 179,
+      "timestamp_sec": 6.0,
+      "sharpness": 0.0006773,
+      "novelty": 0.2369238,
+      "reason": "visual_change",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "index": 11,
+      "filename": "frames/frame_00011_t000006.600.jpg",
+      "frame_number": 197,
+      "timestamp_sec": 6.6,
+      "sharpness": 0.0005452,
+      "novelty": 0.2633027,
+      "reason": "visual_change",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "index": 12,
+      "filename": "frames/frame_00012_t000007.200.jpg",
+      "frame_number": 215,
+      "timestamp_sec": 7.2,
+      "sharpness": 0.0004883,
+      "novelty": 0.2260409,
+      "reason": "visual_change",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "index": 13,
+      "filename": "frames/frame_00013_t000008.800.jpg",
+      "frame_number": 263,
+      "timestamp_sec": 8.8,
+      "sharpness": 0.0004275,
+      "novelty": 0.2314833,
+      "reason": "visual_change",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "index": 14,
+      "filename": "frames/frame_00014_t000009.400.jpg",
+      "frame_number": 281,
+      "timestamp_sec": 9.4,
+      "sharpness": 0.0003763,
+      "novelty": 0.1535275,
+      "reason": "visual_change",
+      "width": 720,
+      "height": 1280
+    }
+  ]
+}

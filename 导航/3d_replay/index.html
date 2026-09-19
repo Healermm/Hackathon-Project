@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Route Replay · 2.5D 立体导航</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main id="app">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">ROUTE REPLAY / PROTOTYPE</div>
+          <h1>校园食堂 · 2.5D 立体导航</h1>
+        </div>
+        <div class="status" id="status">演示路线已加载</div>
+      </header>
+
+      <section class="workspace">
+        <div class="scene-wrap">
+          <canvas id="scene" aria-label="3D 路线视图"></canvas>
+          <div class="landmark-card" id="landmarkCard">
+            <span class="card-kicker">下一个路标</span>
+            <strong id="nextLandmark">中央楼梯</strong>
+            <span id="landmarkHint">继续前进，约 12 米后右转</span>
+          </div>
+          <div class="help">电脑：W 前进 · S 后退 · 拖动改变视角</div>
+          <div class="progress-line"><span id="progressFill"></span></div>
+        </div>
+
+        <aside class="minimap-panel">
+          <div class="panel-title"><span>完整路线</span><span id="distanceLabel">0 / 86 m</span></div>
+          <svg id="minimap" viewBox="0 0 220 330" role="img" aria-label="完整 2D 路线进度">
+            <path class="map-road" d="M44 300 L44 240 L90 198 L90 142 L155 105 L155 48 L185 22" />
+            <path class="map-progress" id="mapProgress" d="M44 300 L44 240 L90 198 L90 142 L155 105 L155 48 L185 22" />
+            <g class="map-nodes">
+              <circle cx="44" cy="300" r="7" /><text x="58" y="305">起点</text>
+              <circle cx="90" cy="198" r="6" /><text x="103" y="203">中央楼梯</text>
+              <circle cx="155" cy="105" r="6" /><text x="104" y="96">红色招牌</text>
+              <circle cx="185" cy="22" r="7" /><text x="148" y="18">食堂 3 号档口</text>
+            </g>
+            <circle id="mapCursor" class="map-cursor" cx="44" cy="300" r="8" />
+          </svg>
+          <div class="legend"><span><i class="dot done"></i>已行进</span><span><i class="dot"></i>路线</span></div>
+        </aside>
+      </section>
+
+      <section class="controls">
+        <button class="control-btn" id="resetBtn">重新开始</button>
+        <button class="control-btn primary" id="forwardBtn" aria-label="长按前进">长按前进</button>
+        <button class="control-btn" id="gyroBtn">启用手机转向</button>
+        <label class="speed">速度 <input id="speed" type="range" min="0.5" max="3" step="0.1" value="1" /><output id="speedOut">1.0x</output></label>
+      </section>
+      <p class="input-note">手机端：长按“前进”按钮；左右转动手机改变观察方向。摄像头不参与定位，进度由虚拟相机沿路线推进。</p>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

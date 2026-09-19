@@ -1,0 +1,16 @@
+﻿index,filename,frame_number,timestamp_sec,sharpness,novelty,reason,width,height
+0,frames/frame_00000_t000000.000.jpg,0,0.0,0.0010072,1.0,first_frame,720,1280
+1,frames/frame_00001_t000000.600.jpg,18,0.6,0.0009692,0.1050431,visual_change,720,1280
+2,frames/frame_00002_t000001.200.jpg,36,1.2,0.0009353,0.1441564,visual_change,720,1280
+3,frames/frame_00003_t000001.800.jpg,53,1.8,0.000559,0.1843915,visual_change,720,1280
+4,frames/frame_00004_t000002.400.jpg,71,2.4,0.000676,0.1997995,visual_change,720,1280
+5,frames/frame_00005_t000003.000.jpg,89,3.0,0.000895,0.1199343,visual_change,720,1280
+6,frames/frame_00006_t000003.600.jpg,107,3.6,0.0003094,0.1562724,visual_change,720,1280
+7,frames/frame_00007_t000004.200.jpg,125,4.2,0.0005361,0.174111,visual_change,720,1280
+8,frames/frame_00008_t000004.800.jpg,143,4.8,0.000469,0.1630304,visual_change,720,1280
+9,frames/frame_00009_t000005.400.jpg,161,5.4,0.0007719,0.1820208,visual_change,720,1280
+10,frames/frame_00010_t000006.000.jpg,179,6.0,0.0006773,0.2369238,visual_change,720,1280
+11,frames/frame_00011_t000006.600.jpg,197,6.6,0.0005452,0.2633027,visual_change,720,1280
+12,frames/frame_00012_t000007.200.jpg,215,7.2,0.0004883,0.2260409,visual_change,720,1280
+13,frames/frame_00013_t000008.800.jpg,263,8.8,0.0004275,0.2314833,visual_change,720,1280
+14,frames/frame_00014_t000009.400.jpg,281,9.4,0.0003763,0.1535275,visual_change,720,1280

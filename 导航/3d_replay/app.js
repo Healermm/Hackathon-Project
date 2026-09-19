@@ -1,0 +1,28 @@
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js';
+
+const route = { length: 86, points: [[0,0,0],[0,0,-18],[8,0,-28],[8,0,-46],[25,0,-58],[25,0,-73],[35,0,-84]], landmarks: [
+  { distance: 18, name: '中央楼梯', hint: '继续前进，约 12 米后右转', color: 0xf6b85f },
+  { distance: 52, name: '红色招牌', hint: '看到红色招牌后左转', color: 0xe66d5a },
+  { distance: 86, name: '食堂 3 号档口', hint: '已到达目的地', color: 0x68e0bd }
+] };
+const canvas = document.querySelector('#scene');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true }); renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.shadowMap.enabled = true;
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x0b171d); scene.fog = new THREE.Fog(0x0b171d, 18, 130);
+const camera = new THREE.PerspectiveCamera(62, 1, .1, 220);
+scene.add(new THREE.HemisphereLight(0xc9f4ff, 0x15242a, 2.2)); const sun = new THREE.DirectionalLight(0xffe1ad, 2.1); sun.position.set(-20,35,15); sun.castShadow = true; scene.add(sun);
+const pts = route.points.map(p => new THREE.Vector3(...p)); const curve = new THREE.CatmullRomCurve3(pts); curve.arcLengthDivisions = 300; curve.getLengths();
+const road = new THREE.Mesh(new THREE.TubeGeometry(curve, 180, 2.2, 8, false), new THREE.MeshStandardMaterial({ color: 0x39545a, roughness: .9 })); road.receiveShadow = true; scene.add(road);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(180,180), new THREE.MeshStandardMaterial({ color: 0x10232a, roughness: 1 })); floor.rotation.x = -Math.PI/2; floor.position.y = -2.25; floor.receiveShadow = true; scene.add(floor);
+const landmarkMeshes = [];
+route.landmarks.forEach((l, i) => { const t = l.distance / route.length; const p = curve.getPointAt(t); const group = new THREE.Group(); group.position.copy(p); group.position.y = 2.1; const body = new THREE.Mesh(new THREE.BoxGeometry(2.5,4.2,1.2), new THREE.MeshStandardMaterial({ color: l.color, roughness: .55 })); body.castShadow = true; group.add(body); const cap = new THREE.Mesh(new THREE.BoxGeometry(3.1,.25,1.6), new THREE.MeshStandardMaterial({ color: 0xeef6e8 })); cap.position.y = 2.2; group.add(cap); scene.add(group); landmarkMeshes.push(group); });
+let progress = 0, yaw = 0, speed = 1, moving = false, last = performance.now(), dragX = null;
+const mapPoints = [[44,300],[44,240],[90,198],[90,142],[155,105],[155,48],[185,22]];
+function pointAtDistance(d) { return curve.getPointAt(Math.min(d / route.length, 1)); }
+function updateUI() { const d = progress * route.length; document.querySelector('#distanceLabel').textContent = `${Math.round(d)} / ${route.length} m`; document.querySelector('#progressFill').style.width = `${progress*100}%`; const total = mapPoints.length-1; const x = d/route.length*total; const i=Math.min(Math.floor(x),total-1), f=x-i; const a=mapPoints[i], b=mapPoints[Math.min(i+1,total)]; document.querySelector('#mapCursor').setAttribute('cx',a[0]+(b[0]-a[0])*f); document.querySelector('#mapCursor').setAttribute('cy',a[1]+(b[1]-a[1])*f); document.querySelector('#mapProgress').style.strokeDashoffset = 520 - 520*progress; const next=route.landmarks.find(l=>l.distance>d) || route.landmarks.at(-1); document.querySelector('#nextLandmark').textContent=next.name; document.querySelector('#landmarkHint').textContent=next.distance>d?`${next.hint} · ${Math.ceil(next.distance-d)} 米`:next.hint; document.querySelector('#status').textContent = progress>=.999?'已到达目的地':'虚拟相机沿路线前进中'; }
+function resize() { const r=canvas.getBoundingClientRect(); renderer.setSize(r.width,r.height,false); camera.aspect=r.width/r.height; camera.updateProjectionMatrix(); } addEventListener('resize',resize); resize();
+function tick(now) { const dt=Math.min((now-last)/1000,.05); last=now; if(moving) progress=Math.min(1,progress+dt*speed*.075); const p=pointAtDistance(progress*route.length); const ahead=pointAtDistance(Math.min(progress*route.length+3,route.length)); camera.position.set(p.x+Math.sin(yaw)*4.2,p.y+2.2,p.z+Math.cos(yaw)*4.2); camera.lookAt(ahead.x+Math.sin(yaw)*1.5,1.0,ahead.z+Math.cos(yaw)*1.5); renderer.render(scene,camera); updateUI(); requestAnimationFrame(tick); } requestAnimationFrame(tick);
+addEventListener('keydown',e=>{if(e.key.toLowerCase()==='w') moving=true;if(e.key.toLowerCase()==='s') { moving=true; speed=-Math.abs(speed); }}); addEventListener('keyup',e=>{if(['w','s'].includes(e.key.toLowerCase())) {moving=false; speed=Math.abs(speed);}});
+canvas.addEventListener('pointerdown',e=>dragX=e.clientX); canvas.addEventListener('pointermove',e=>{if(dragX!==null){yaw+=(e.clientX-dragX)*.006;dragX=e.clientX;}}); addEventListener('pointerup',()=>dragX=null);
+const forward=document.querySelector('#forwardBtn'); const start=()=>{moving=true}; const stop=()=>{moving=false}; ['pointerdown','touchstart'].forEach(e=>forward.addEventListener(e,start,{passive:true})); ['pointerup','pointercancel','pointerleave','touchend'].forEach(e=>forward.addEventListener(e,stop,{passive:true}));
+document.querySelector('#resetBtn').onclick=()=>{progress=0;yaw=0}; document.querySelector('#speed').oninput=e=>{speed=Math.abs(+e.target.value);document.querySelector('#speedOut').textContent=`${speed.toFixed(1)}x`};
+document.querySelector('#gyroBtn').onclick=async()=>{try{if(typeof DeviceOrientationEvent?.requestPermission==='function') await DeviceOrientationEvent.requestPermission(); addEventListener('deviceorientation',e=>{if(e.gamma!=null) yaw=THREE.MathUtils.degToRad(THREE.MathUtils.clamp(e.gamma,-55,55));});document.querySelector('#gyroBtn').textContent='手机转向已启用';}catch{document.querySelector('#gyroBtn').textContent='需要系统授权';}};
